@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interação de Treino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .large-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">Vai para o treino hoje?</h1>
+
+    <div id="button-container">
+        <button class="button" onclick="chooseYes()">Sim</button>
+        <button class="button" onclick="chooseNo()">Não</button>
+    </div>
+
+    <p id="response" class="hidden"></p>
+    <p id="extraMessage" class="hidden"></p>
+
+    <script>
+        let noClickCount = 0;
+        let yesClicked = false;
+
+        function chooseYes() {
+            if (!yesClicked) {
+                document.getElementById("response").textContent = "Ótimo, te espero lá";
+                yesClicked = true;
+            } else {
+                document.getElementById("response").textContent = "Eu sou barril mesmo, mas vá para o treino";
+            }
+            document.getElementById("response").classList.remove("hidden");
+            document.getElementById("button-container").classList.add("hidden");
+            setTimeout(() => showOssi(), 2000);
+        }
+
+        function chooseNo() {
+            noClickCount++;
+            if (noClickCount === 1) {
+                document.getElementById("response").textContent = "Tá com medo de mim, né?";
+            } else if (noClickCount === 2) {
+                document.getElementById("response").textContent = "É bom passar a ter!";
+            }
+            document.getElementById("response").classList.remove("hidden");
+
+            if (noClickCount >= 2) {
+                document.getElementById("button-container").classList.add("hidden");
+                setTimeout(() => showOssi(), 2000);
+            }
+        }
+
+        function showOssi() {
+            document.getElementById("extraMessage").textContent = "Ossi";
+            document.getElementById("extraMessage").classList.remove("hidden");
+            setTimeout(() => {
+                document.getElementById("extraMessage").textContent = "Fim";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
